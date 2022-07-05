@@ -54,7 +54,7 @@ CREATE TABLE adress (
     city VARCHAR(40) NOT NULL,
     streetNr INTEGER NOT NULL,
     plz INTEGER NOT NULL,
-    country INTEGER
+    country INTEGER NOT NULL
 );
 
 CREATE TABLE customer (
@@ -63,7 +63,7 @@ CREATE TABLE customer (
     email VARCHAR(40) NOT NULL,
     firstname VARCHAR(40) NOT NULL,
     name VARCHAR(40) NOT NULL,
-    adress INTEGER
+    adress INTEGER NOT NULL
 );
 
 CREATE TABLE paymentinfo (
@@ -71,16 +71,15 @@ CREATE TABLE paymentinfo (
     cardNr INTEGER NOT NULL,
     owner VARCHAR(40) NOT NULL,
     valid_till DATE NOT NULL,
-    customer INTEGER 
+    customer INTEGER NOT NULL
 );
-
 
 CREATE TABLE leasing (
   lID INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   total INTEGER,
   startDate DATE DEFAULT SYSDATE NOT NULL, -- Default value today
   endDate DATE DEFAULT SYSDATE + 1 NOT NULL, -- Default leasing duration one day
-  customer INTEGER
+  customer INTEGER NOT NULL
 );
 
 CREATE TABLE part (
