@@ -72,11 +72,12 @@ CREATE TABLE paymentinfo (
     customer INTEGER
 );
 
+
 CREATE TABLE leasing (
   lID INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   total INTEGER,
-  startDate DATE NOT NULL,
-  endDate DATE NOT NULL,
+  startDate DATE DEFAULT SYSDATE NOT NULL, -- Default value today
+  endDate DATE DEFAULT SYSDATE + 1 NOT NULL, -- Default leasing duration one day
   customer INTEGER
 );
 
