@@ -9,6 +9,8 @@ ALTER TABLE leasing DROP CONSTRAINT leasing_fk1;
 ALTER TABLE part DROP CONSTRAINT part_fk1;
 ALTER TABLE part DROP CONSTRAINT part_fk2;
 ALTER TABLE leasing_bike DROP CONSTRAINT leasing_bike_u1;
+ALTER TABLE leasing DROP CONSTRAINT leasing_valid_total;
+ALTER TABLE bike DROP CONSTRAINT bike_valid_price;
 
 -- DROP TABLES
 DROP TABLE country;
@@ -32,7 +34,7 @@ CREATE TABLE bike(
 
 CREATE TABLE biketype(
     btID INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    type VARCHAR(40)
+    type VARCHAR(40) NOT NULL
 );
 
 CREATE TABLE leasing_bike(
@@ -69,7 +71,7 @@ CREATE TABLE paymentinfo (
     cardNr INTEGER NOT NULL,
     owner VARCHAR(40) NOT NULL,
     valid_till DATE NOT NULL,
-    customer INTEGER
+    customer INTEGER 
 );
 
 
@@ -83,14 +85,14 @@ CREATE TABLE leasing (
 
 CREATE TABLE part (
   pID INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name VARCHAR(40),
+  name VARCHAR(40) NOT NULL,
   leasing INTEGER,
-  parttype INTEGER
+  parttype INTEGER NOT NULL
 );
 
 CREATE TABLE parttype (
   ptID INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  type varchar(40)
+  type varchar(40) NOT NULL
 );
 
 -- Adding Constrains
@@ -104,4 +106,9 @@ ALTER TABLE leasing ADD CONSTRAINT leasing_fk1 FOREIGN KEY (customer) REFERENCES
 ALTER TABLE part ADD CONSTRAINT part_fk1 FOREIGN KEY (leasing) REFERENCES leasing(lID);
 ALTER TABLE part ADD CONSTRAINT part_fk2 FOREIGN KEY (parttype) REFERENCES parttype(ptID);
 
+-- Unique constraints
 ALTER TABLE leasing_bike ADD CONSTRAINT leasing_bike_u1 UNIQUE (leasing, bike);
+
+-- Check Constrains
+ALTER TABLE leasing ADD CONSTRAINT leasing_valid_total CHECK (total>=0);
+ALTER TABLE bike ADD CONSTRAINTS bike_valid_price CHECK (price>=0);
