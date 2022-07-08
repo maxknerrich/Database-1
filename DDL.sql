@@ -2,7 +2,7 @@
 ALTER TABLE bike DROP CONSTRAINT bike_fk1;
 ALTER TABLE leasing_bike DROP CONSTRAINT leasing_bike_fk1;
 ALTER TABLE leasing_bike DROP CONSTRAINT leasing_bike_fk2;
-ALTER TABLE adress DROP CONSTRAINT adress_fk;
+ALTER TABLE address DROP CONSTRAINT address_fk;
 ALTER TABLE customer DROP CONSTRAINT customer_fk1;
 ALTER TABLE paymentinfo DROP CONSTRAINT paymentinfo_fk1;
 ALTER TABLE leasing DROP CONSTRAINT leasing_fk1;
@@ -17,7 +17,7 @@ DROP TABLE country;
 DROP TABLE parttype;
 DROP TABLE biketype;
 DROP TABLE bike;
-DROP TABLE adress;
+DROP TABLE address;
 DROP TABLE customer;
 DROP TABLE paymentinfo;
 DROP TABLE leasing;
@@ -48,7 +48,7 @@ CREATE TABLE country (
     name VARCHAR(40) NOT NULL
 );
 
-CREATE TABLE adress (
+CREATE TABLE address (
     aID INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     street VARCHAR(40) NOT NULL,
     city VARCHAR(40) NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE customer (
     email VARCHAR(40) NOT NULL,
     firstname VARCHAR(40) NOT NULL,
     name VARCHAR(40) NOT NULL,
-    adress INTEGER NOT NULL
+    address INTEGER NOT NULL
 );
 
 CREATE TABLE paymentinfo (
@@ -98,8 +98,8 @@ CREATE TABLE parttype (
 ALTER TABLE bike ADD CONSTRAINT bike_fk1 FOREIGN KEY (biketype) REFERENCES biketype(btID);
 ALTER TABLE leasing_bike ADD CONSTRAINT leasing_bike_fk1 FOREIGN KEY (leasing) REFERENCES leasing(lID);
 ALTER TABLE leasing_bike ADD CONSTRAINT leasing_bike_fk2 FOREIGN KEY (bike) REFERENCES bike(bID);
-ALTER TABLE adress ADD CONSTRAINT adress_fk FOREIGN KEY (country) REFERENCES country(couID);
-ALTER TABLE customer ADD CONSTRAINT customer_fk1 FOREIGN KEY (adress) REFERENCES adress(aID);
+ALTER TABLE address ADD CONSTRAINT address_fk FOREIGN KEY (country) REFERENCES country(couID);
+ALTER TABLE customer ADD CONSTRAINT customer_fk1 FOREIGN KEY (address) REFERENCES address(aID);
 ALTER TABLE paymentinfo ADD CONSTRAINT paymentinfo_fk1 FOREIGN KEY (customer) REFERENCES customer(cID);
 ALTER TABLE leasing ADD CONSTRAINT leasing_fk1 FOREIGN KEY (customer) REFERENCES customer(cID);
 ALTER TABLE part ADD CONSTRAINT part_fk1 FOREIGN KEY (leasing) REFERENCES leasing(lID);
