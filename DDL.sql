@@ -2,7 +2,7 @@
 ALTER TABLE bike DROP CONSTRAINT bike_fk1;
 ALTER TABLE leasing_bike DROP CONSTRAINT leasing_bike_fk1;
 ALTER TABLE leasing_bike DROP CONSTRAINT leasing_bike_fk2;
-ALTER TABLE address DROP CONSTRAINT address_fk;
+ALTER TABLE address DROP CONSTRAINT address_fk1;
 ALTER TABLE customer DROP CONSTRAINT customer_fk1;
 ALTER TABLE paymentinfo DROP CONSTRAINT paymentinfo_fk1;
 ALTER TABLE leasing DROP CONSTRAINT leasing_fk1;
@@ -11,6 +11,7 @@ ALTER TABLE part DROP CONSTRAINT part_fk2;
 ALTER TABLE leasing_bike DROP CONSTRAINT leasing_bike_u1;
 ALTER TABLE leasing DROP CONSTRAINT leasing_valid_total;
 ALTER TABLE bike DROP CONSTRAINT bike_valid_price;
+ALTER TABLE leasing DROP CONSTRAINT leasing_valid_dates;
 
 -- DROP TABLES
 DROP TABLE country;
@@ -98,7 +99,7 @@ CREATE TABLE parttype (
 ALTER TABLE bike ADD CONSTRAINT bike_fk1 FOREIGN KEY (biketype) REFERENCES biketype(btID);
 ALTER TABLE leasing_bike ADD CONSTRAINT leasing_bike_fk1 FOREIGN KEY (leasing) REFERENCES leasing(lID);
 ALTER TABLE leasing_bike ADD CONSTRAINT leasing_bike_fk2 FOREIGN KEY (bike) REFERENCES bike(bID);
-ALTER TABLE address ADD CONSTRAINT address_fk FOREIGN KEY (country) REFERENCES country(couID);
+ALTER TABLE address ADD CONSTRAINT address_fk1 FOREIGN KEY (country) REFERENCES country(couID);
 ALTER TABLE customer ADD CONSTRAINT customer_fk1 FOREIGN KEY (address) REFERENCES address(aID);
 ALTER TABLE paymentinfo ADD CONSTRAINT paymentinfo_fk1 FOREIGN KEY (customer) REFERENCES customer(cID);
 ALTER TABLE leasing ADD CONSTRAINT leasing_fk1 FOREIGN KEY (customer) REFERENCES customer(cID);
