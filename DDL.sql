@@ -110,4 +110,5 @@ ALTER TABLE leasing_bike ADD CONSTRAINT leasing_bike_u1 UNIQUE (leasing, bike);
 
 -- Check Constrains
 ALTER TABLE leasing ADD CONSTRAINT leasing_valid_total CHECK (total>=0);
-ALTER TABLE bike ADD CONSTRAINTS bike_valid_price CHECK (price>=0);
+ALTER TABLE bike ADD CONSTRAINT bike_valid_price CHECK (price>=0);
+ALTER TABLE leasing ADD CONSTRAINT leasing_valid_dates CHECK (startDate<endDate);
