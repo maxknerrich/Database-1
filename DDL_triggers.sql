@@ -6,14 +6,14 @@ REFERENCING NEW AS NEW OLD AS OLD
 FOR EACH ROW
 DECLARE
     leasing_rec leasing%rowtype;
-    bikePrice bike.price%type;
-    bikeLeasingPrice bike.price%type;
+    bikePrice bike.pricePerDay%type;
+    bikeLeasingPrice bike.pricePerDay%type;
     newTotal leasing.total%type;
 BEGIN
     SELECT * INTO leasing_rec FROM leasing
     WHERE lid = :NEW.leasing;
     
-    SELECT price INTO bikePrice FROM bike
+    SELECT pricePerDay INTO bikePrice FROM bike
     WHERE bid = :NEW.bike;
     
     bikeLeasingPrice := (leasing_rec.endDate - leasing_rec.startDate) * bikePrice;
@@ -30,16 +30,16 @@ BEGIN
 END;
 
 
--- UPDATE TRIGGER: recalculates total price of a leasing it's enddate is updated
+-- UPDATE TRIGGER: recalculates total price of a leasing when its endDate is updated
 
 CREATE OR REPLACE TRIGGER TRG_LEASING_PRE_UPDATE_ENDDATE
 BEFORE UPDATE OF endDate ON leasing
 REFERENCING NEW AS NEW OLD AS OLD
 FOR EACH ROW
 DECLARE
-    totalPricePerDay bike.price%type;
+    totalPricePerDay bike.pricePerDay%type;
 BEGIN
-    SELECT SUM(price) INTO totalPricePerDay FROM leasing_bike
+    SELECT SUM(pricePerDay) INTO totalPricePerDay FROM leasing_bike
     INNER JOIN bike ON bike.bid = leasing_bike.bike
     WHERE leasing = :NEW.lid;
     

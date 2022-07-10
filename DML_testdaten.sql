@@ -40,13 +40,13 @@ INSERT INTO biketype(type) VALUES('Citybike');
 INSERT INTO biketype(type) VALUES('Gravelbike');
 INSERT INTO biketype(type) VALUES('Trekkingbike');
 
-INSERT INTO bike(price, biketype) VALUES(9.99, 1);
-INSERT INTO bike(price, biketype) VALUES(9.99, 1);
-INSERT INTO bike(price, biketype) VALUES(7.99, 1);
-INSERT INTO bike(price, biketype) VALUES(11.50, 2);
-INSERT INTO bike(price, biketype) VALUES(11.50, 2);
-INSERT INTO bike(price, biketype) VALUES(10, 3);
-INSERT INTO bike(price, biketype) VALUES(10, 3);
+INSERT INTO bike(pricePerDay, biketype) VALUES(9.99, 1);
+INSERT INTO bike(pricePerDay, biketype) VALUES(9.99, 1);
+INSERT INTO bike(pricePerDay, biketype) VALUES(7.99, 1);
+INSERT INTO bike(pricePerDay, biketype) VALUES(11.50, 2);
+INSERT INTO bike(pricePerDay, biketype) VALUES(11.50, 2);
+INSERT INTO bike(pricePerDay, biketype) VALUES(10, 3);
+INSERT INTO bike(pricePerDay, biketype) VALUES(10, 3);
 
 
 -- LEASING DATA
