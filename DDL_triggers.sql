@@ -28,7 +28,37 @@ BEGIN
     SET total = newTotal
     WHERE lid = leasing_rec.lid;
 END;
+/
 
+CREATE OR REPLACE TRIGGER TRG_PART_INSERT_UPDATE_PRE
+BEFORE INSERT OR UPDATE ON part
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+DECLARE
+    leasing_rec leasing%rowtype;
+    partPrice part.pricePerDay%type;
+    partLeasingPrice part.pricePerDay%type;
+    newTotal leasing.total%type;
+BEGIN
+    SELECT * INTO leasing_rec FROM leasing
+    WHERE lid = :NEW.leasing;
+    
+    SELECT pricePerDay INTO bikePrice FROM part
+    WHERE pid = :NEW.part;
+    
+    partLeasingPrice := (leasing_rec.endDate - leasing_rec.startDate) * partPrice;
+    
+    IF(leasing_rec.total IS NULL) THEN
+        newTotal := partLeasingPrice;
+    ELSE
+        newTotal := leasing_rec.total + partLeasingPrice;
+    END IF;
+    
+    UPDATE leasing
+    SET total = newTotal
+    WHERE lid = part_rec.lid;
+END;
+/
 
 -- UPDATE TRIGGER: recalculates total price of a leasing when its endDate is updated
 
@@ -37,11 +67,16 @@ BEFORE UPDATE OF endDate ON leasing
 REFERENCING NEW AS NEW OLD AS OLD
 FOR EACH ROW
 DECLARE
-    totalPricePerDay bike.pricePerDay%type;
+    totalBikePricePerDay bike.pricePerDay%type;
+    totalPartPricePerDay part.pricePerDay%type;
 BEGIN
-    SELECT SUM(pricePerDay) INTO totalPricePerDay FROM leasing_bike
+    SELECT SUM(pricePerDay) INTO totalBikePricePerDay FROM leasing_bike
     INNER JOIN bike ON bike.bid = leasing_bike.bike
     WHERE leasing = :NEW.lid;
     
-    :NEW.total := (:NEW.endDate - :OLD.startDate) * totalPricePerDay;
+    SELECT SUM(pricePerDay) INTO totalPartPricePerDay FROM part
+    WHERE leasing = :NEW.lid;
+    
+    :NEW.total := (:NEW.endDate - :OLD.startDate) * (totalBikePricePerDay + totalPartPricePerDay);
 END;
+/
