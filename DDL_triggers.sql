@@ -43,8 +43,7 @@ BEGIN
     SELECT * INTO leasing_rec FROM leasing
     WHERE lid = :NEW.leasing;
     
-    SELECT pricePerDay INTO bikePrice FROM part
-    WHERE pid = :NEW.part;
+    partPrice := :NEW.pricePerDay;
     
     partLeasingPrice := (leasing_rec.endDate - leasing_rec.startDate) * partPrice;
     
@@ -56,7 +55,7 @@ BEGIN
     
     UPDATE leasing
     SET total = newTotal
-    WHERE lid = part_rec.lid;
+    WHERE lid = leasing_rec.lid;
 END;
 /
 
