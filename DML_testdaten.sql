@@ -7,17 +7,17 @@ INSERT INTO country(name) VALUES('Frankreich');
 
 -- CUSTOMER DATA( includes address and paymentinfo )
 
-INSERT INTO address(street, streetnr, plz, city, country) VALUES('Nobelstraße', 10, 70569, 'Stuttgart', 1);
+INSERT INTO address(street, streetno, postcode, city, country) VALUES('Nobelstraße', 10, 70569, 'Stuttgart', 1);
 INSERT INTO customer(firstname, name, address, email, tel) VALUES('Frank', 'Schmidt', 1, 'frank-schmidt@gmail.com', 0711654321);
-INSERT INTO paymentinfo(customer, cardnr, owner, valid_till) VALUES(1, 7894456112307894, 'Franziska Schmidt', TO_DATE('23.10.2024','DD.MM.YYYY'));
+INSERT INTO paymentinfo(customer, cardno, owner, valid_till) VALUES(1, 7894456112307894, 'Franziska Schmidt', TO_DATE('23.10.2024','DD.MM.YYYY'));
 
-INSERT INTO address(street, streetnr, plz, city, country) VALUES('Ackerstrasse', 23, 4057, 'Basel', 2);
+INSERT INTO address(street, streetno, postcode, city, country) VALUES('Ackerstrasse', 23, 4057, 'Basel', 2);
 INSERT INTO customer(firstname, name, address, email, tel) VALUES('Marie', 'Schneider', 2, 'marie-schneider@gmail.com', 0611603316);
-INSERT INTO paymentinfo(customer, cardnr, owner, valid_till) VALUES(2, 6112307894789445, 'Marie Schneider', TO_DATE('12.03.2023','DD.MM.YYYY'));
+INSERT INTO paymentinfo(customer, cardno, owner, valid_till) VALUES(2, 6112307894789445, 'Marie Schneider', TO_DATE('12.03.2023','DD.MM.YYYY'));
 
-INSERT INTO address(street, streetnr, plz, city, country) VALUES('Rue des Pierres', 10, 68120, 'Mulhouse', 3);
+INSERT INTO address(street, streetno, postcode, city, country) VALUES('Rue des Pierres', 10, 68120, 'Mulhouse', 3);
 INSERT INTO customer(firstname, name, address, email, tel) VALUES('Franc', 'Henry', 3, 'franc-henry@gmail.fr', 0368975623);
-INSERT INTO paymentinfo(customer, cardnr, owner, valid_till) VALUES(3, 4789445611230789, 'Franc Henry', TO_DATE('22.06.2025','DD.MM.YYYY'));
+INSERT INTO paymentinfo(customer, cardno, owner, valid_till) VALUES(3, 4789445611230789, 'Franc Henry', TO_DATE('22.06.2025','DD.MM.YYYY'));
 
 
 -- PART DATA
