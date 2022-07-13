@@ -3,5 +3,5 @@
 */
 
 UPDATE leasing
-SET enddate = TO_DATE('12.07.2022')
+SET enddate = TO_DATE('12.07.2022','DD.MM.YYYY')
 WHERE lid=1;
