@@ -40,25 +40,26 @@ DECLARE
     partLeasingPrice part.pricePerDay%type;
     newTotal leasing.total%type;
 BEGIN
-    SELECT * INTO leasing_rec FROM leasing
-    WHERE lid = :NEW.leasing;
+    IF (:NEW.leasing IS NOT NULL) THEN
+        SELECT * INTO leasing_rec FROM leasing
+        WHERE lid = :NEW.leasing;
     
-    partPrice := :NEW.pricePerDay;
+        partPrice := :NEW.pricePerDay;
     
-    partLeasingPrice := (leasing_rec.endDate - leasing_rec.startDate) * partPrice;
+        partLeasingPrice := (leasing_rec.endDate - leasing_rec.startDate) * partPrice;
     
-    IF(leasing_rec.total IS NULL) THEN
-        newTotal := partLeasingPrice;
-    ELSE
-        newTotal := leasing_rec.total + partLeasingPrice;
+        IF(leasing_rec.total IS NULL) THEN
+            newTotal := partLeasingPrice;
+        ELSE
+            newTotal := leasing_rec.total + partLeasingPrice;
+        END IF;
+    
+        UPDATE leasing
+        SET total = newTotal
+        WHERE lid = leasing_rec.lid;
     END IF;
-    
-    UPDATE leasing
-    SET total = newTotal
-    WHERE lid = leasing_rec.lid;
 END;
 /
-
 -- UPDATE TRIGGER: recalculates total price of a leasing when its endDate is updated
 
 CREATE OR REPLACE TRIGGER TRG_LEASING_PRE_UPDATE_ENDDATE
