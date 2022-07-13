@@ -29,7 +29,7 @@ DROP TABLE leasing_bike;
 
 CREATE TABLE bike(
     bID INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    pricePerDay NUMBER(4,2) NOT NULL,
+    pricePerDay NUMBER(6,2) NOT NULL,
     biketype INTEGER NOT NULL
 );
 
@@ -77,7 +77,7 @@ CREATE TABLE paymentinfo (
 
 CREATE TABLE leasing (
   lID INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  total NUMBER(4,2),
+  total NUMBER(6,2),
   startDate DATE DEFAULT SYSDATE NOT NULL, -- Default value today
   endDate DATE DEFAULT SYSDATE + 1 NOT NULL, -- Default leasing duration one day
   customer INTEGER NOT NULL
@@ -86,7 +86,7 @@ CREATE TABLE leasing (
 CREATE TABLE part (
   pID INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   name VARCHAR(40) NOT NULL,
-  pricePerDay NUMBER(3,2) NOT NULL,
+  pricePerDay NUMBER(6,2) NOT NULL,
   leasing INTEGER,
   parttype INTEGER NOT NULL
 );
