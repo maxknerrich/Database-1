@@ -27,7 +27,7 @@ INSERT INTO parttype(type) VALUES('Satteltasche');
 INSERT INTO parttype(type) VALUES('Klingel');
 
 INSERT INTO part(name, pricePerDay, parttype) VALUES('Klemmlicht_A', 3, 1);
-INSERT INTO part(name, pricePerDay, parttype) VALUES('Klemmlicht_B' 3, 1);
+INSERT INTO part(name, pricePerDay, parttype) VALUES('Klemmlicht_B', 3, 1);
 INSERT INTO part(name, pricePerDay, parttype) VALUES('Rücklicht_A', 2.50, 1);
 INSERT INTO part(name, pricePerDay, parttype) VALUES('Sattetasche_Schwarz_A', 4.99, 2);
 INSERT INTO part(name, pricePerDay, parttype) VALUES('Sattetasche_Schwarz_B', 4.99 , 2);
